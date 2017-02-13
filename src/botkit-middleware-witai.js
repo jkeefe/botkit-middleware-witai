@@ -34,6 +34,12 @@ module.exports = function(config) {
         // if (message.text && message.text.indexOf(bot.identity.id) > -1) {
         // JK: I'm changing this because I want every message to go to WIT.
         if (message.text) {
+            
+            // strip out reference to bot if it's there
+            var botid = "<@" + bot.identity.id + ">";
+            
+            message.text = message.text.replace(botid, '');
+            
             client.message(message.text, function(error, data) {
                 if (error) {
                     next(error);
